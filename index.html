@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  /* 🔥 Background merah tua + logo */
+  background: linear-gradient(rgba(80,0,0,0.9), rgba(40,0,0,0.95)),
+              url('logo.png'); /* ganti dengan logo kamu */
+  background-size: cover;
+  background-position: center;
+}
+*{
+  box-sizing: border-box;
+}
+/* 🔳 Card login */
+.login-box{
+  background: none;
+  padding:30px;
+  width:90%;
+  max-width:350px;
+  text-align:center;
+}
+
+/* 🖼 Logo atas */
+.logo{
+  width:100%;
+  margin-bottom:0px;
+}
+
+/* 📝 Title */
+h2{
+  margin-bottom:30px;
+  margin-top:0;
+  color:#800000;
+  text-shadow: 0 0 5px black;
+}
+
+/* 🔲 Input */
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:14px;
+}
+
+/* 🔘 Button */
+button{
+  width:100%;
+  padding:12px;
+  background:#8B0000;
+  color:white;
+  border:none;
+  border-radius:8px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+/* Hover */
+button:hover{
+  background:#a30000;
+}
+
+/* Footer kecil */
+.footer{
+  margin-top:15px;
+  font-size:12px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <!-- 🔥 Logo -->
+  <img src="logo.png" class="logo">
+
+  <h2>Login Kurir</h2>
+
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+
+  <button onclick="login()">Masuk</button>
+
+  <div class="footer">Sistem Kurir v1.0</div>
+
+</div>
+
+<script>
+const URL = "https://script.google.com/macros/s/AKfycbyU15SAum8ga6TeuQbpxxuL8kRf9PL2_NvFR96Wc7oraqSDSn6HB1Qm1P3o4SF-6uGQ/exec";
+
+function login(){
+  let u = document.getElementById("user").value;
+  let p = document.getElementById("pass").value;
+
+  if(!u || !p){
+    alert("Isi username & password!");
+    return;
+  }
+
+  fetch(URL,{
+    method:"POST",
+    body:JSON.stringify({
+      action:"login",
+      username:u,
+      password:p
+    })
+  })
+  .then(res => res.json())
+  .then(res => {
+
+    if(res.status === "success"){
+      // ✅ simpan NAMA kurir (bukan username)
+      localStorage.setItem("user", res.nama);
+
+      window.location.href = "app.html";
+    }else{
+      alert("Username atau password salah!");
+    }
+
+  })
+  .catch(()=>{
+    alert("Gagal koneksi ke server");
+  });
+}
+</script>
+</body>
+</html>
