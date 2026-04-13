@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="header" id="title">Pesanan</div>
+
+<div class="tab" id="tabDiambil" style="display:none;">
+  <button onclick="setTab('jalan')" id="btnJalan">Sedang Berlangsung</button>
+  <button onclick="setTab('selesai')" id="btnSelesai">Selesai</button>
+</div>
+
+<div class="filter" id="filter" style="display:none;">
+  <button id="btnHari" onclick="toggleHari()">Hari Ini</button>
+  <button id="btnKirim" onclick="toggleJenis('Pengantaran')">Pengantaran</button>
+  <button id="btnAntar" onclick="toggleJenis('Pengambilan')">Pengambilan</button>
+</div>
+
+<div id="total" style="display:none;"></div>
+<div id="content"></div>
+
+<!-- POPUP -->
+<div id="popup">
+  <h3>Selesaikan Pesanan</h3>
+
+  <input id="ket_kurir" placeholder="Keterangan (opsional)">
+
+  <br><br>
+
+  <label>Masukan parkir (opsional)</label>
+  <select id="parkir">
+    <option value="">Tidak ada</option>
+    <script>
+      for(let i=1;i<=10;i++){
+        document.write(`<option value="${i}">${i}</option>`);
+      }
+    </script>
+  </select>
+
+  <br><br>
+
+  <button onclick="kirimSelesai()">Kirim</button>
+  <button onclick="closePopup()">Batal</button>
+</div>
+
+<div class="menu">
+  <button onclick="setMenu('pesanan')" id="btnMenuPesanan">Pesanan</button>
+  <button onclick="setMenu('diambil')" id="btnMenuDiambil">Diambil</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
